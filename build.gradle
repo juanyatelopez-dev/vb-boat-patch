@@ -1,0 +1,36 @@
+plugins {
+    id 'net.minecraftforge.gradle' version '6.0.+'
+    id 'org.spongepowered.mixin' version '0.7.+'
+}
+
+version = '1.0.0'
+group = 'net.patch'
+archivesBaseName = 'vb_boat_patch'
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+minecraft {
+    mappings channel: 'official', version: '1.20.1'
+}
+
+mixin {
+    add sourceSets.main, "vb_boat_patch.mixins.json"
+}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.20.1-47.2.0'
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+}
+
+jar {
+    manifest {
+        attributes([
+            "MixinConfigs": "vb_boat_patch.mixins.json",
+            "Implementation-Version": project.version,
+            "Implementation-Title": "BoatPatch",
+            "Implementation-Vendor": "Gemini",
+            "ForgeGroup": "net.patch",
+            "ForgeVersion": "47.2.0"
+        ])
+    }
+}
